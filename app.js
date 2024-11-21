@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const morgan = require('morgan'); 
+const ejs = require('ejs');
+
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -29,6 +31,10 @@ app.use('/', protectedRoutes);
 
 const authRoutes = require('./routes/Auth');
 app.use('/', authRoutes);
+
+const activityRoutes = require('./routes/activity');
+app.use('/activities', activityRoutes);
+
 
 
 
