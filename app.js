@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const morgan = require('morgan'); // Middleware for logging requests
+const morgan = require('morgan'); 
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -14,18 +14,26 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(morgan('dev')); // Log all incoming requests
+app.use(morgan('dev')); 
 app.use(methodOverride('_method'));
+
 app.use(session({
   secret: 'yourSecretKey',
   resave: false,
   saveUninitialized: false,
 }));
 
-// Placeholder Routes
+const protectedRoutes = require('./routes/protected'); 
+app.use('/', protectedRoutes);
+
+
+const authRoutes = require('./routes/Auth');
+app.use('/', authRoutes);
+
+
+
 app.get('/', (req, res) => {
-  // Render the index.ejs template
-  res.render('index.ejs'); // Assumes a views/index.ejs file exists
+  res.render('index.ejs'); 
 });
 
 // Start the Server
