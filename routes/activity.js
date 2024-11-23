@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { isAuthenticated } = require('./middleware/auth');
+const { isAuthenticated, restrictGuests } = require('./middleware/authenticate');
 const Activity = require('../models/Activity');
 const mongoose = require('mongoose');
 const User = require('../models/User'); 
@@ -90,7 +90,7 @@ router.get('/:id/edit', isAuthenticated, async (req, res) => {
 });
 
 // Create route: Add a new activity
-router.post('/', isAuthenticated, async (req, res) => {
+router.post('/', restrictGuests, isAuthenticated, async (req, res) => {
   try {
     req.body.userId = req.session.userId; 
     req.body.date = new Date(`${req.body.date}T00:00:00.000Z`); 
@@ -102,7 +102,7 @@ router.post('/', isAuthenticated, async (req, res) => {
   }
 });
 // Update route: Update an existing activity
-router.put('/:id', isAuthenticated, async (req, res) => {
+router.put('/:id', restrictGuests, isAuthenticated, async (req, res) => {
   try {
       const updatedData = {
           ...req.body,
@@ -118,7 +118,7 @@ router.put('/:id', isAuthenticated, async (req, res) => {
 });
 
 // Delete route: Remove an activity
-router.delete('/:id', isAuthenticated, async (req, res) => {
+router.delete('/:id', restrictGuests, isAuthenticated, async (req, res) => {
   try {
     await Activity.findByIdAndDelete(req.params.id);
     res.redirect('/activities');
