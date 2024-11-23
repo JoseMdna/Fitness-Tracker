@@ -7,5 +7,17 @@
 </head>
 <body>
   <h1>All Activities</h1>
+  <% activities.forEach(activity => { %>
+    <div>
+        <h2><%= activity.name %></h2>
+        <p>Duration: <%= activity.duration %> minutes</p>
+        <p>Date: <%= activity.formattedDate %></p>
+        <a href="/activities/<%= activity._id %>/edit">Edit</a>
+        <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+<% }) %>
+
 </body>
 </html>

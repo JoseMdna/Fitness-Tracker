@@ -1,0 +1,8 @@
+<h1><%= activity.name %></h1>
+<p>Duration: <%= activity.duration %> minutes</p>
+<p>Date: <%= formattedDate %></p>
+<a href="/activities/<%= activity._id %>/edit">Edit</a>
+<form action="/activities/<%= activity._id %>?_method=DELETE" method="POST">
+    <button type="submit">Delete</button>
+</form>
+<a href="/activities">Back to Activities</a>

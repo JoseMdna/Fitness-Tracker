@@ -1,3 +1,5 @@
+process.env.tz = process.env.TIMEZONE || 'utc'
+
 const express = require('express');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
@@ -18,6 +20,8 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(morgan('dev')); 
 app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true })); 
+
 
 app.use(session({
   secret: 'yourSecretKey',

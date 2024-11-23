@@ -9,32 +9,18 @@ router.get('/register', (req, res) => {
 });
 
 
-router.post('/register', (req, res) => {
-  let body = '';
-
-
-  req.on('data', (chunk) => {
-    body += chunk.toString(); 
-  });
-
-  req.on('end', async () => {
-    try {
-      const parsedBody = new URLSearchParams(body);
-
-      const email = parsedBody.get('email');
-      const password = parsedBody.get('password');
+router.post('/register', async (req, res) => {
+  try {
+      const { email, password } = req.body;
 
       const hashedPassword = await bcrypt.hash(password, 10);
-
-    
       await User.create({ email, password: hashedPassword });
 
       res.redirect('/login'); 
-    } catch (error) {
+  } catch (error) {
       console.error('Error during registration:', error);
       res.status(500).send('Error creating user');
-    }
-  });
+  }
 });
 
 // Show login form
@@ -42,48 +28,44 @@ router.get('/login', (req, res) => {
   res.render('login.ejs');
 });
 
+router.post('/login', async (req, res) => {
+  try {
+      const { email, password } = req.body;
 
-router.post('/login', (req, res) => {
-  let body = '';
-
-
-  req.on('data', (chunk) => {
-    body += chunk.toString(); 
-  });
-
-  req.on('end', async () => {
-    try {
-      const parsedBody = new URLSearchParams(body);
-
-      const email = parsedBody.get('email');
-      const password = parsedBody.get('password');
+      if (!email || !password) {
+          return res.status(400).send('Email and password are required'); 
+      }
 
       const user = await User.findOne({ email });
 
-      if (user && (await bcrypt.compare(password, user.password))) {
-        req.session.userId = user._id; 
-        res.redirect('/'); 
-      } else {
-        res.redirect('/login');
+      if (!user) {
+          return res.status(400).send('Invalid email or password');
       }
-    } catch (error) {
+
+      const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+      if (!isPasswordCorrect) {
+          return res.status(400).send('Invalid email or password'); 
+      }
+
+      req.session.userId = user._id;
+      res.redirect('/activities');
+  } catch (error) {
       console.error('Error during login:', error);
       res.status(500).send('Error logging in');
-    }
-  });
+  }
 });
+
+
 
 // Handle logout
 router.post('/logout', (req, res) => {
-  console.log('Logout route hit');
-
   req.session.destroy((err) => {
-    if (err) {
-      console.error('Error during logout:', err);
-      return res.status(500).send('Error during logout'); 
-    }
-    console.log('Session destroyed successfully'); 
-    res.send('Logout successful'); 
+      if (err) {
+          console.error('Error during logout:', err);
+          return res.status(500).send('Error during logout');
+      }
+      res.redirect('/login'); 
   });
 });
 
