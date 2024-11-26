@@ -1,15 +1,24 @@
-<h1>New Activity</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <title>Create Activity</title>
+</head>
+<body>
+<%- include('../partials/navbar') %>
 <form action="/activities" method="POST">
-    <label for="name">Activity Name:</label>
-    <input type="text" id="name" name="name" required>
+  <label for="name">Activity Name:</label>
+  <input type="text" id="name" name="name" required />
 
-    <label for="duration">Duration (in minutes):</label>
-    <input type="number" id="duration" name="duration" required>
+  <label for="duration">Duration (in minutes):</label>
+  <input type="number" id="duration" name="duration" required />
 
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" required>
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required />
 
-    <input type="hidden" name="userId" value="<%= user._id %>"> <!-- Pass the userId -->
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" required></textarea>
 
-    <button type="submit">Create Activity</button>
+  <button type="submit">Create Activity</button>
 </form>
+</body>

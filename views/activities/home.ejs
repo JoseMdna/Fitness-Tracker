@@ -3,21 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Activities</title>
+  <link rel="stylesheet" href="/css/style.css"> 
+  <title>All Activities</title>
 </head>
 <body>
+<%- include('../partials/navbar') %>
+<div class="container">
   <h1>All Activities</h1>
-  <% activities.forEach(activity => { %>
-    <div>
-        <h2><%= activity.name %></h2>
-        <p>Duration: <%= activity.duration %> minutes</p>
-        <p>Date: <%= activity.formattedDate %></p>
-        <a href="/activities/<%= activity._id %>/edit">Edit</a>
-        <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST">
-            <button type="submit">Delete</button>
-        </form>
+  <% if (activities && activities.length > 0) { %>
+    <div class="activity-grid">
+      <% activities.forEach(activity => { %>
+        <div class="activity-card">
+          <h2><%= activity.name %></h2>
+          <p>Duration: <%= activity.duration %> minutes</p>
+          <p>Date: <%= activity.formattedDate %></p>
+          <p>Description: <%= activity.description %></p>
+          <% if (!isGuest && userId === activity.userId.toString()) { %>
+            <div class="actions">
+              <a class="primary" href="/activities/<%= activity._id %>/edit">Edit</a>
+              <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button class="danger" type="submit">Delete</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% }); %>
     </div>
-<% }) %>
-
+  <% } else { %>
+    <p>No activities found.</p>
+  <% } %>
+</div>
 </body>
 </html>

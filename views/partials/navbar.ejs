@@ -1,0 +1,17 @@
+<nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/activities">Community Activities</a></li>
+    <% if (user && user.email && !user.email.includes('Guest')) { %>
+      <li><a href="/profile">Profile</a></li>
+      <li>
+        <form action="/logout" method="POST">
+          <button class="primary" type="submit">Logout</button>
+        </form>
+      </li>
+    <% } else { %>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li>
+    <% } %>
+  </ul>
+</nav>

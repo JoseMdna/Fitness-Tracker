@@ -1,8 +1,17 @@
-<h1><%= activity.name %></h1>
-<p>Duration: <%= activity.duration %> minutes</p>
-<p>Date: <%= formattedDate %></p>
-<a href="/activities/<%= activity._id %>/edit">Edit</a>
-<form action="/activities/<%= activity._id %>?_method=DELETE" method="POST">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= activity.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+  <%- include('../partials/navbar') %>
+  <h1><%= activity.name %></h1>
+  <p>Duration: <%= activity.duration %> minutes</p>
+  <p>Date: <%= formattedDate %></p>
+  <p>Description: <%= activity.description %></p>
+  <a href="/activities/<%= activity._id %>/edit">Edit</a>
+  <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST">
     <button type="submit">Delete</button>
-</form>
-<a href="/activities">Back to Activities</a>
+  </form>
+  </body>

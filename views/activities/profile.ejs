@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css"> 
+  <title>Your Activities</title>
+</head>
+<body>
+<%- include('../partials/navbar') %>
+<div class="container">
+  <h1>Your Activities</h1>
+  <a class="primary" href="/activities/new">Create New Activity</a> 
+  <ul>
+    <% activities.forEach(activity => { %>
+      <li class="card">
+        <strong><%= activity.name %></strong><br>
+        Duration: <%= activity.duration %> minutes<br>
+        Date: <%= activity.formattedDate %><br>
+        Description: <%= activity.description %><br>
+        <div class="actions">
+          <a class="primary" href="/activities/<%= activity._id %>/edit">Edit</a>
+          <form action="/activities/<%= activity._id %>?_method=DELETE" method="POST" style="display:inline;">
+            <button class="danger" type="submit">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+  <a href="/">Back to Home</a>
+</div>
+</body>
+</html>
