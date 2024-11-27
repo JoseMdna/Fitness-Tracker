@@ -24,7 +24,7 @@ app.use(morgan('dev'));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'yourSecretKey', 
+    secret: process.env.SESSION_SECRET || 'secret', 
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false },
