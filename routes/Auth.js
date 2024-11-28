@@ -25,7 +25,7 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-      const { email, password } = req.body;
+      const { email, password } = req.body
       const hashedPassword = await bcrypt.hash(password, 10)
       await User.create({ email, password: hashedPassword })
       res.redirect('/login')
@@ -41,7 +41,8 @@ router.post('/register', async (req, res) => {
 
   router.get('/login', (req, res) => {
     res.render('login.ejs', { error: null })
-});
+})
+
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -55,7 +56,7 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).render('login.ejs', { error: 'An unexpected error occurred. Please try again.' })
     }
-});
+})
 
 
 

@@ -7,7 +7,7 @@ A web application designed to help users track their fitness activities. The app
 ## Screenshot/Logo
 
 
-![alt text](image-1.png)
+![Landing Page](public/image-1.png)
 ---
 
 ## Description
@@ -25,11 +25,6 @@ The app includes session-based authentication to ensure data privacy. Guest user
 I built this application for users who want to track their physical activities.
 
 ---
-
-## Getting Started
-
-### Deployed App
-
 
 ### Planning Materials
 - [Wireframes](#)
