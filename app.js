@@ -8,7 +8,7 @@ const User = require('./models/User')
 const Activity = require('./models/Activity')
 const { isAuthenticated, restrictGuests } = require('./routes/middleware/authenticate')
 const protectedRoutes = require('./routes/protected')
-const activityRoutes = require('./routes/activity')
+const activityRoutes = require('./routes/activity');
 require('dotenv').config()
 
 const app = express()
