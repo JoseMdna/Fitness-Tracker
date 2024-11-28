@@ -8,4 +8,4 @@ const activitySchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'user', required: true },
 })
 
-module.exports = mongoose.models.Activity || mongoose.model('activity', activitySchema);
+module.exports = mongoose.models.Activity || mongoose.model('Activity', activitySchema);
