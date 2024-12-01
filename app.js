@@ -63,7 +63,7 @@ app.use('/activities', activityRoutes)
 
 app.get('/profile', isAuthenticated, async (req, res) => {
     try {
-        const activities = await activity.find({ userId: req.session.userId })
+        const activities = await Activity.find({ userId: req.session.userId })
         const formattedActivities = activities.map(activity => ({
             ...activity._doc,
             formattedDate: new Date(activity.date).toISOString().split('T')[0],

@@ -94,7 +94,7 @@ router.get('/:id', async (req, res) => {
     if (!activity) {
       return res.status(404).send('Activity not found')
     }
-    const formattedDate = activity.date
+    const formattedDate = Activity.date
     res.render(path.join(__dirname, '../views/activities/show.ejs'), {
       activity,
       formattedDate, 
