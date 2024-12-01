@@ -4,7 +4,11 @@ A web application designed to help users track their fitness activities. The app
 
 ---
 
-## Screenshot/Logo
+### Deployed App
+[Click here to view the deployed app](<https://pers-fitness-tracker-app-51ed0c8a2e7a.herokuapp.com/>)
+
+
+## Screenshot
 
 
 ![Landing Page](public/image-1.png)

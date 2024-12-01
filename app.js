@@ -11,14 +11,18 @@ const protectedRoutes = require('./routes/protected')
 const activityRoutes = require('./routes/activity');
 require('dotenv').config()
 
+
 const app = express()
 app.use(express.static(path.join(__dirname, 'public')))
+
 
 mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log('Connected to MongoDB'))
     .catch((error) => console.error('Error connecting to MongoDB:', error))
 
+
 const PORT = process.env.PORT || 3000
+
 
 app.use(morgan('dev'))
 app.use(methodOverride('_method'))
@@ -29,6 +33,7 @@ app.use(session({
     saveUninitialized: false,
     cookie: { secure: false },
 }))
+
 
 app.use(async (req, res, next) => {
     if (req.session.userId) {
@@ -67,12 +72,13 @@ app.get('/profile', isAuthenticated, async (req, res) => {
         const formattedActivities = activities.map(activity => ({
             ...activity._doc,
             formattedDate: new Date(activity.date).toISOString().split('T')[0],
-        }));
+        }))
         res.render('activities/profile.ejs', { activities: formattedActivities })
     } catch (error) {
         res.status(500).send('Internal Server Error')
     }
 })
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)

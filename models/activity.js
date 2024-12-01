@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const activitySchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -6,6 +6,6 @@ const activitySchema = new mongoose.Schema({
   date: { type: String, required: true },
   description: { type: String, required: true },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
-});
+})
 
-module.exports = mongoose.models.Activity || mongoose.model('Activity', activitySchema);
+module.exports = mongoose.models.Activity || mongoose.model('Activity', activitySchema)
