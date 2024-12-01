@@ -3,7 +3,6 @@ const router = express.Router()
 const { isAuthenticated, restrictGuests } = require('./middleware/authenticate')
 const Activity = require('../models/activity');
 const { validateOwnership } = require('./middleware/authorize')
-const path = require('path')
 
 router.get('/', async (req, res) => {
   try {
@@ -95,7 +94,7 @@ router.get('/:id', async (req, res) => {
       return res.status(404).send('Activity not found')
     }
     const formattedDate = activity.date
-    res.render('activities/show', {
+    res.render('activities/show.ejs', {
       activity,
       formattedDate, 
     })
