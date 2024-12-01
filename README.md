@@ -17,7 +17,7 @@ A web application designed to help users track their fitness activities. The app
 ## Description
 
 ### About the App
-The **Fitness Tracker** is focus aroud full CRUD
+The **Fitness Tracker App** is focus aroud full CRUD
 - **Create** new fitness activities.
 - **View** their created activities.
 - **Update** activities as needed.
@@ -31,9 +31,9 @@ I built this application for users who want to track their physical activities.
 ---
 
 ### Planning Materials
-- [Wireframes](#)
-- [User Stories](#)
-- [ERD (Entity Relationship Diagram)](#)
+- **Wireframes**
+- **User Stories**
+- **ERDS**
 
 ---
 
