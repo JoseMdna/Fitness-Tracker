@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const morgan = require('morgan')
-const User = require('./models/User')
+const User = require('./models/user')
 const Activity = require('./models/activity')
 const { isAuthenticated, restrictGuests } = require('./routes/middleware/authenticate')
 const protectedRoutes = require('./routes/protected')
@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
-const { router: authRoutes } = require('./routes/Auth')
+const { router: authRoutes } = require('./routes/auth')
 app.use('/', authRoutes)
 
 app.use('/protected', isAuthenticated, protectedRoutes)
@@ -63,7 +63,7 @@ app.use('/activities', activityRoutes)
 
 app.get('/profile', isAuthenticated, async (req, res) => {
     try {
-        const activities = await Activity.find({ userId: req.session.userId })
+        const activities = await activity.find({ userId: req.session.userId })
         const formattedActivities = activities.map(activity => ({
             ...activity._doc,
             formattedDate: new Date(activity.date).toISOString().split('T')[0],
